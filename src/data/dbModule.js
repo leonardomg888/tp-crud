@@ -14,11 +14,11 @@ return JSON.parse(
 const  storeProducts =(products) =>{
   
 
-    return JSON.parse(
+ 
         fs.writeFileSync(path.join(__dirname, "./productsDataBase.json"),JSON.stringify(products), "utf-8")
     
-    );
-    }
+    
+}
 
 
 module.exports={

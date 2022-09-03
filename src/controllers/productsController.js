@@ -73,31 +73,33 @@ const controller = {
 		let productsModify = loadProducts().map(product =>{
 			if(product.id === +req.params.id){
 				return {
-					id : product[product.length - 1].id + 1,
-			
-			name: name.trim(),
-			price : +price,
-			category,
-			descount : +discount,
-			description : description.trim(),
-
-						image : product.image
+					  // id : product[product.length - 1].id + 1,
+					  ...product,
+					  name: name.trim(),
+					     price : +price,
+					    category,
+					     descount : +discount,
+					     description : description.trim(),
+		
+								
+											}
+					
+				       }
+				return product;
+			}  )
+				storeProducts(productsModify);
+				productos = loadProducts();
+				return res.redirect('/products/detail/' + req.params.id)
+			},
+		
+			// Delete - Delete one product from DB
+			destroy : (req, res) => {
+				// Do the magic
+				let productsModify = loadProducts().filter(product => product.id !== + req.params.id);
+				storeProducts(productsModify);
+				return res.redirect('/products')
 			}
+		};
+		
+		module.exports = controller;
 			
-		}
-		return product
-	})
-		storeProducts(productsModify);
-		return res.redirect('/products/detail/' + req.params.id)
-	},
-
-	// Delete - Delete one product from DB
-	destroy : (req, res) => {
-		// Do the magic
-		let productsModify = loadProducts().filter(product => product.id !== + req.params.id);
-		storeProducts(productsModify);
-		return res.redirect('/products')
-	}
-};
-
-module.exports = controller;
